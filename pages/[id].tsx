@@ -4,12 +4,18 @@ import utilStyles from '../styles/utils.module.css'
 import { GetServerSideProps } from 'next'
 import axios from 'axios'
 import { Article } from './index'
+import Custom404 from './404'
 
 type props = {
   article: Article
 }
 
 export default function Post(props: props) {
+  if (props.article === undefined) {
+    return (
+      <Custom404 />
+    )
+  }
   return (
     <Layout>
       <Head>
@@ -24,12 +30,20 @@ export default function Post(props: props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const response = await axios.get(`${process.env.HOST}/v1/articles/${params?.id}`)
-  const article = Object.entries(response.data)[0][1]
+  try {
+    const response = await axios.get(`${process.env.HOST}/v1/articles/${params?.id}`)
+    const article = Object.entries(response.data)[0][1]
 
-  return {
-    props: {
-      article
+    return {
+      props: {
+        article
+      }
+    }
+  } catch (error) {
+    console.error(error)
+
+    return {
+      props: {}
     }
   }
 }
