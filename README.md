@@ -1,0 +1,1 @@
+A simple web that demonstrates Server-Side Rendering with Next.js and TypeScript.
