@@ -9,7 +9,7 @@ export default function Custom404() {
     </Head>
     <article>
       <h1 className={utilStyles.headingXl}>Not Found</h1>
-      <div dangerouslySetInnerHTML={{ __html: '<p>The article that you are looking for is not found.</p>' }} />
+      <p>The article that you are looking for is not found.</p>
     </article>
   </Layout>
 }
